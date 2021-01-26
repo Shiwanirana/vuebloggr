@@ -4,7 +4,7 @@
     <div class="card col-4 m-3  box" @click="setActive">
       <div class="card-body text-center">
         <!-- <img v-if="state.account.id=== blogProp.creatorId" :src=" blogProp.creator.picture" alt="" /> -->
-        <h5 :contenteditable="state.editBlog" @blur="editBlog">
+        <h5>
           Title: {{ blogProp.title }}
         </h5>
         <small>

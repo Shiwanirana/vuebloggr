@@ -67,15 +67,19 @@ class BlogService {
 
   async deleteBlog(blogId) {
     await api.delete('api/blogs/' + blogId)
-    const blogInd = AppState.blogs.findIndex(b => b.id === blogId)
-    AppState.blogs.splice(blogInd, 1)
+    AppState.blogs = AppState.blogs.filter(b => b.id !== blogId)
+    AppState.myblogs = AppState.myblogs.filter(b => b.id !== blogId)
+    // const blogInd = AppState.blogs.findIndex(b => b.id === blogId)
+    // AppState.blogs.splice(blogInd, 1)
   }
 
   async editBlog(blogId, newTitle) {
     const blogData = { title: newTitle }
-    const res = await api.put('api/blogs/' + blogId, blogData)
-    const blogInd = AppState.blogs.findIndex(b => b.id === blogId)
-    AppState.blogs.splice(blogInd, 1, res.data)
+    await api.put('api/blogs/' + blogId, blogData)
+    AppState.blogs = AppState.blogs.filter(b => b.id !== blogId)
+    AppState.myblogs = AppState.myblogs.filter(b => b.id !== blogId)
+    // const blogInd = AppState.blogs.findIndex(b => b.id === blogId)
+    // AppState.blogs.splice(blogInd, 1, res.data)
   }
 }
 

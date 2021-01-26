@@ -66,4 +66,7 @@ export default {
 img {
   max-width: 100px;
 }
+.pointer{
+  cursor: pointer;
+}
 </style>

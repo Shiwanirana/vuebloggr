@@ -2,14 +2,14 @@
   <div>
     <ul>
       <li>
-        <p :contenteditable="state.editComment" @blur="editComment">
+        <p v-if="commentProp.creator" :contenteditable="state.editComment" @blur="editComment">
           {{ commentProp.body }}
         </p>
       </li>
     </ul>
     <p>
-      <i class="fa fa-thumbs-up" aria-hidden="true" @click="editComment"></i><span>   </span>
-      <i class="fa fa-trash text-danger" aria-hidden="true" @click="deleteComment"></i>
+      <i class="fas fa-pencil-alt fa-2x pointer" v-if="state.account.id == commentProp.creatorId" @click="state.editComment =!state.editComment"></i><span>   </span>
+      <i class="fa fa-trash text-danger fa-2x pointer" aria-hidden="true" v-if="state.account.id == commentProp.creatorId" @click="deleteComment"></i>
     </p>
   </div>
 </template>
@@ -30,7 +30,8 @@ export default {
   setup(props) {
     const state = reactive({
       comments: computed(() => AppState.comments),
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+      editComment: false
     })
     return {
       state,
@@ -53,3 +54,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+ .pointer{
+  cursor: pointer;
+}
+</style>
